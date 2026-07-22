@@ -35,11 +35,11 @@ const userSchema = new mongoose.Schema(
             type : String,
             required : true,
             default : "/default.jpg"
-        },
-        invalidTries : {
-            type : Number,
-            default : 0
-        }
+        } //,
+//invalidTries : {
+       //     type : Number,
+       //     default : 0
+      //  }
     }
 )
 

@@ -53,67 +53,14 @@ app.use(
 
     
            
-    })
-
-
-app.use("/users",userRouter)
-app.use("/products",productRouter)
-
-
-
-app.get("/",
-    (req, res)=>{
-   
-        Student.find().then(
-            (students)=>{
-                res.json(students)
-            }
-        
-        )
     }
 )
 
-app.post("/" ,
-    (req, res)=>{
-    
-        // Read the data inside the request.
-        console.log(req.body)
 
-        const student = new Student(req.body)
-        student.save().then(
-            ()=>{
-                res.json({
-                    message : "Student created successfully"
-                })
-            }
-        )
-        // Create and Student in the student collection
+app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
 
-        
 
-})
-
-app.delete("/" , 
-    (req, res)=>{
-
-     res.json({
-        message : "Goodbye" + req.body.name
-    })
-
-})
-
-app.put("/" , 
-    (req, res)=>{
-
-     res.json({
-        message : "See You again " + req.body.name
-    })
-
-})
-
-function abc(){
-    console.log("Server is running")
-}
 
 app.listen(5000 , 
     () => {

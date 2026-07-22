@@ -45,7 +45,7 @@ export async function getAllProducts(req, res) {
 
 			const products = await Product.find();
 
-			res.json(products);
+			//res.json(products);
 		} else {
 			Product.find({ isAvailable: true })
 				.then((products) => {
@@ -131,6 +131,7 @@ export function getProductByID(req, res) {
 		});
 }
 
+/*
 export async function searchProducts(req,res){
 	const query = req.params.query
 
@@ -154,7 +155,7 @@ export async function searchProducts(req,res){
 		})
 	}
 
-}
+} */
 
 
 

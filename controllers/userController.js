@@ -31,8 +31,7 @@ export function loginUser(req, res){
     const email = req.body.email
     const password = req.body.password
 
-    User.find({email : email}).then(
-        (users)=>{
+    User.find({email : email}).then((users)=>{
             if(users[0] == null){
                 res.json({
                     message : "Use not found"
@@ -40,12 +39,12 @@ export function loginUser(req, res){
             }else{
                 const user = users[0]
 
-                if(user.invalidTries >= 3){
+             /*   if(user.invalidTries >= 3){
                     res.json({
                         message : "your account is remporily locked due to multiple failed login attempts"
                     });
                     return;
-                }
+               } */
 
                 const isPasswordCorrect = bcrypt.compareSync(password, user.password)
 
@@ -62,23 +61,27 @@ export function loginUser(req, res){
                     //const token = JsonWebTokenError.toString(payload, "secretkey96$2025")
                      const token = jwt.sign(payload, process.env.jwt_secret,{
                         expiresIn: "150h"
-                     })
+                     });
+
                     res.json({
                        message : "Loging Successful",
-                       token : token
-                     })
+                       token : token,
+                       role: user.role,
+                     });
 
                 }else{
-                    user.updateOne({
+                     res.status(401).json({
+                         message : "Invalid password",
+                    });
+
+                  /*  user.updateOne({
                         invalidTries : user.invalidTries + 1
                     }).then(()=>{
-                    res.status(401).json({
-                         message : "Invalid password",
-                    })})
+                    }) */
                 }
                 
             }
-        }
+       }
     )
 }
 
@@ -92,3 +95,5 @@ export function isAdmin(req) {
 
 	return true;
 }
+
+// add try catch for async-await

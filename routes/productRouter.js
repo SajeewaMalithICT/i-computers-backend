@@ -13,7 +13,7 @@ productRouter.get("/trending", (req,res)=>{
 
 productRouter.post("/", createProduct)
 
-productRouter.get("/search/:query", searchProducts)
+//productRouter.get("/search/:query", searchProducts)
 
 productRouter.get("/:productID", getProductByID)
 

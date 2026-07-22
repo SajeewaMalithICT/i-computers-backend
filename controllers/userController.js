@@ -60,7 +60,7 @@ export function loginUser(req, res){
                     };
 
                     //const token = JsonWebTokenError.toString(payload, "secretkey96$2025")
-                     const token = jwt.sign(payload, "secretkey96$2025",{
+                     const token = jwt.sign(payload, process.env.jwt_secret,{
                         expiresIn: "150h"
                      })
                     res.json({
